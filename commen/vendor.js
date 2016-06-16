@@ -1,4 +1,6 @@
-define(function(require, exports, module){
+
+//css3变换
+define(function(){
 	var style = document.createElement('div').style,
 		getPrefix = function() {
 			for(var tempStr, arr = 'webkitT,MozT,msT,OT'.split(","), index = 0, len = arr.length; len > index; index++) {
@@ -23,7 +25,7 @@ define(function(require, exports, module){
 			return "webkit" == getPrefix || "O" === getPrefix ? getPrefix.toLowerCase() + "TransitionEnd": "transitionend"
 		} ();
 		style = null;
-		module.exports = {
+		return {
 			vendor: getPrefix,
 			propVendor: getPrefix,
 			cssVendor: prefix,

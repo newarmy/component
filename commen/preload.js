@@ -1,4 +1,10 @@
-define(function(require, exports, module) {
+//预加载
+define(function() {
+	/*
+		resultDom: 显示加载完的百分比
+		imgArr: 预加载图片地址数组
+		opt: 配置选项
+	*/
 	var PreLoad = function (resultDom, imgArr, opt) {
 		if(!imgArr || !Array.isArray(imgArr) || !imgArr.length) {
 			return;
@@ -25,6 +31,6 @@ define(function(require, exports, module) {
 			s.src = k.prefix + imgSrc;
 		});
 	};
-	module.exports = PreLoad;
+    return PreLoad;
 });
 

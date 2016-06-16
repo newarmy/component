@@ -1,9 +1,8 @@
-define(function(require, exports, module) {
-	var eventObj = require('./touchEvent');
+define(['c/touchEvent'],function(eventObj) {
 	/*
 	  说明： 用touch事件和transform :"translate3d(0,0,0)"样式实现移动端滑动效果
 	  参数：
-	   opt.el :焦点图容器dom，
+	   opt.el :焦点图容器dom
 	   opt.tagName:子元素标签名
 	   opt.swipe：横向还是纵向滑动
 	   opt.nav:导航容器dom
@@ -26,6 +25,7 @@ define(function(require, exports, module) {
 		this.left = 0;//this.swipe = 'X'
 		this.top = 0;//this.swipe = 'Y'
 		this.count = 0;//子元素的个数
+		this.pcMoveFlag = true;
         this.init();
     };
 	Slide.prototype = {
@@ -103,6 +103,7 @@ define(function(require, exports, module) {
             k.pageX = t.x;
             k.pageY = t.y;
 			k.fangxiang = '';
+			k.pcMoveFlag = false;
             if (window.PointerEvent || window.MSPointerEvent) {
                 var sleft = k.el.style.msTransform || k.el.style.transform;
                 k.left = k.getInitPosition(sleft, "x");
@@ -115,6 +116,9 @@ define(function(require, exports, module) {
 		},
         touchmove: function(e) {
 		   var k = this;
+		   if(k.pcMoveFlag) {
+			   return;
+		   }
            var t = eventObj.getPoint(e);
            var px = t.x;
            var py = t.y;
@@ -146,10 +150,12 @@ define(function(require, exports, module) {
         },
         touchend: function(e) {
 		   var k = this;
+		   k.pcMoveFlag = true;
 		   k.setNewPosition();
         },
         touchcancel: function(e) {
            var k = this;
+		    k.pcMoveFlag = true;
 		   k.setNewPosition();
         },
 		setNewPosition: function () {
@@ -246,6 +252,6 @@ define(function(require, exports, module) {
             return a;
         }
     };
-	module.exports = Slide;
+	return Slide;
 });
 

@@ -28,7 +28,7 @@ define(function (require, exports, module) {
 		}
 		return e;
 	}
-	module.exports = {
+	return {
 		touchStart: start,
 		touchMove : move,
 		touchEnd : end,

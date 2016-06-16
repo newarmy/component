@@ -1,11 +1,13 @@
-define(function(require, exports, module) {
+define(function() {
 	function get(e) {
 		return document.querySelector(e);
 	}
 	function gets(e) {
 		return document.querySelectorAll(e);
 	}
-	exports.get = get;
-	exports.gets = gets;
+	return {
+		get: get,
+		gets: gets
+	};
 });
 
