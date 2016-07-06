@@ -1,0 +1,30 @@
+*{-webkit-box-sizing:border-box;box-sizing:border-box}
+body,h1,h2,h3,h4,h5,h6,dl,dt,dd,ul,ol,li,th,td,p,form,input,button,textarea,hr,article,footer,header,menu,nav,section{margin:0;padding:0}
+img{vertical-align:middle;border:0;max-width:100%}
+a{color:#fff;text-decoration:none}
+li{vertical-align:middle;list-style:none}
+html,body{width:100%;height:100%;overflow:hidden}
+html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body{margin:0;color:#fff;font:normal 16px/1.5 "Microsoft Yahei","Helvetica Neue",Helvetica,Arial,STHeiTi,sans-serif;-webkit-tap-highlight-color:transparent;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+button{-webkit-appearance:none}
+.clearfix:before,.clearfix:after{content:'';display:table}
+.clearfix:after{clear:both}
+
+.container {width:100%;height:100%;}
+.box {width:100%;height:85%;overflow:hidden;}
+.box .ul{display:none;width:100%;height:100%;}
+.box .on {display:block;}
+.ul li{width:100%;height:100%;float:left;}
+.ul li:nth-child(1){background:red}
+.ul li:nth-child(2){background:blue}
+.ul li:nth-child(3){background:yellow}
+.nav{width:100%;height:15%;}
+.nav a{display:block;float:left;width:25%;height:100%;line-height:400%;text-align:center;font-size:1rem;color:black;-o-transition:all 0.5s ease-in;-moz-transition:all 0.5s ease-in;-webkit-transition:all 0.5s ease-in;transition:all 0.5s ease-in;}
+.nav a:hover {background:yellow;}
+.nav .on{background:yellow;}
+.nav a:nth-child(1){border-right:1px solid black;}
+.nav a:nth-child(2){border-right:1px solid black;}
+.nav a:nth-child(3){border-right:1px solid black;}
+
+
+

@@ -1,0 +1,72 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<meta charset="utf-8">
+	<title>移动页面滑块选择器</title> 
+	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+	<style>
+		.slider {
+			float: left;
+			width: 340px;
+			background: url(ico1_bg.png) no-repeat center 18px;
+			position: relative;
+			height: 30px;
+		}
+		.slider .pos-l, .slider .pos-r {
+			width: 20px;
+			height: 28px;
+			line-height: 26px;
+			color: #529ff2;
+			font-size: 18px;
+			background: url(ico1_bg.png) no-repeat 0 -80px;
+			display: block;
+			text-align: center;
+			font-family: Arial,Helvetica,sans-serif;
+			position: absolute;
+			top: -4px;
+			cursor: pointer;
+		}
+		.slider .posnum {
+			height: 20px;
+			display: block;
+			border: 1px #ebebeb solid;
+			padding: 0 10px;
+			position: absolute;
+			top: -23px;
+			line-height: 20px;
+			background: #fff;
+			left: 20px;
+		}
+		.slider .posnum em {
+			width: 13px;
+			height: 7px;
+			background: url(ico2_bg.png) no-repeat 0 -195px;
+			display: block;
+			position: absolute;
+			bottom: -6px;
+			left: 50%;
+			margin-left: -6px;
+		}
+		.slider .pos-block {
+			width: 40px;
+			height: 6px;
+			background: #529ff2;
+			position: absolute;
+			top: 18px;
+			left: 20px;
+		}
+	</style>
+	
+	</head> 
+<body> 
+<div class="slider" style="margin-top:100px;margin-left:10px;">
+	<span class="pos-l" style="z-index: 2; left: 0.408163px;">¥</span>
+	<span class="pos-r" style="left: 52.449px; z-index: 2;">¥</span>
+	<div class="posnum" style="left: 7.42857px;">
+		<em></em>5-20万</div>
+	<div class="pos-block" style="left: 10.4082px; width: 52.0408px;"></div>
+</div>
+<script data-main="main.js" src="../lib/require-min.js"></script>
+</body>
+</html>
+
