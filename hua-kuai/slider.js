@@ -8,8 +8,8 @@ define(function () {
 		this.initValue = opt.initValue;
 		this.step = opt.step;
 		this.danwei = opt.danwei || '万';
-		this.leftCtrl = null;
-		this.rightCtrl = null;
+		this.leftCtrl = null;//左按钮
+		this.rightCtrl = null;//右按钮
 		this.block = null;
 		this.info = null;
 		this.boxWidth = 0;
@@ -84,7 +84,6 @@ define(function () {
 		initMoveEvent: function () {
 			var k = this;
 			k.box.on('touchstart', function (e) {
-				e.preventDefault();
 				e.preventDefault();
 				var t = $(e.target);
 				var originLeft = e.touches[0].clientX;

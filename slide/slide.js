@@ -54,7 +54,7 @@ define(['c/touchEvent'],function(eventObj) {
 				k.createNav();
 			}
             this.events();
-			this.automove();
+			//this.automove();
         },
 		createNav: function () {
 			
@@ -193,7 +193,7 @@ define(['c/touchEvent'],function(eventObj) {
 					this.setY(this.el, this.top, 0);
 				}
 		    }
-			k.automove();
+			//k.automove();
 		},
         setX: function(el, len, time) {
 			el.style.webkitTransitionDuration = time + "ms";
