@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+	利用pushState开发无刷页面切换
+</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<style>
+   html, body{ width:100%; height:100%}
+  .page{ width:100%; height:100%}
+  .p1{background:red;}
+  .p2{background:blue;}
+  .p3{background:yellow;}
+  .show{display:block;}
+  .hide{display:none;}
+</style>
+</head>
+<body>
+   <div class="page show p1">
+	<a href="javascript:void" class="btn1">to page2</a>
+   </div>
+   <div class="page hide p2">
+	<a href="javascript:void" class="btn2">to page3</a>
+   </div>
+   <div class="page hide p3">
+	<a href="javascript:void" class="btn3">to page1</a>
+   </div>
+<script>
+	var util = {
+		getDom: function(selector) {
+			return document.querySelector(selector);
+		},
+		getDoms: function (selector) {
+			return document.querySelectorAll(selector);
+		}
+	};
+	var nav = {
+		init: function () {
+			var k = this;
+			k.stateEvent();
+			///k.push({page: 'p1'}, '#page1.shtml');
+			//k.push({page: 'p2'}, '#page2.shtml');
+			//k.push({page: 'p3'}, '#page3.shtml');
+		},
+		push: function (state, page) {
+			history.pushState(state, '', page);
+		},
+		stateEvent: function () {
+			var k = this;
+			util.getDom('.btn1').addEventListener('click', function (e) {
+				e.preventDefault();
+				window.location.href = '#page2.shtml';
+				history.pushState({page: 'p2'}, '', '#page2.shtml');
+			});
+			util.getDom('.btn2').addEventListener('click', function (e) {
+				e.preventDefault();
+				window.location.href = '#page3.shtml';
+				history.pushState({page: 'p3'}, '', '#page3.shtml');
+			});
+			util.getDom('.btn3').addEventListener('click', function (e) {
+				e.preventDefault();
+				window.location.href = '#page1.shtml';
+				history.pushState({page: 'p1'}, '', '#page1.shtml');
+			});
+			//hash事件
+			window.onhashchange = function (e) {
+				 var key = location.hash.slice(1);
+				 console.log('key = '+key);
+				 switch(key) {
+					case 'page1.shtml':
+						k.show('p1');
+						break;
+					case 'page2.shtml':
+						k.show('p2');
+						break;
+					case 'page3.shtml':
+						k.show('p3');
+						break;
+				}
+			};
+			//state事件
+			window.onpopstate = function (e) {
+			console.log(e);
+				var s = e.state;
+				console.log(s);
+				if(!s) {
+					return;
+				}
+				switch(s.page) {
+					case 'p1':
+						k.show('p1');
+						break;
+					case 'p2':
+						k.show('p2');
+						break;
+					case 'p3':
+						k.show('p3');
+						break;
+				}
+				
+			}
+		},
+		show: function (selector) {
+			var k = this;
+			var pages = util.getDoms('.page');
+			var curPage = util.getDom('.'+selector);
+			pages = Array.prototype.slice.call(pages, 0);
+			pages.forEach(function (ele, index) {
+				ele.style.display = 'none';
+			});
+			curPage.style.display = "block";
+		}
+	};
+	nav.init();
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+	利用pushState开发无刷页面切换
+</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<style>
+   html, body{ width:100%; height:100%}
+  .page{ width:100%; height:100%}
+  .p2{background:blue;}
+  .p3{background:yellow;}
+  .show{display:block;}
+  .hide{display:none;}
+</style>
+</head>
+<body>
+   <div id="nav">
+	  <a href="p1.html" class="btn1">to p1</a>
+	  <a href="p2.html" class="btn1">to p2</a>
+	  <a href="p3.html" class="btn1">to p3</a>
+	  <a href="p4.html" class="btn1">to p4</a>
+   </div>
+   <div  id = "ctn" class="page show p1">
+	   
+   </div>
+<script>
+
+    //判断是否支持H5的History API    !!(window.history && history.pushState);
+	var util = {
+		getDom: function(selector) {
+			return document.querySelector(selector);
+		},
+		getDoms: function (selector) {
+			return document.querySelectorAll(selector);
+		}
+	};
+	function loadPage(url, func) {
+		var ifr = document.createElement('iframe');
+		ifr.style.display = "none";
+		document.body.appendChild(ifr);
+		ifr.onload = function () {
+			var doc = ifr.contentDocument;
+			var bodyDom = doc.getElementsByTagName('body')[0];
+			var html = bodyDom.innerHTML;
+			func && func(html, url);
+		};
+		ifr.src = url;
+	}
+	var ctn = util.getDom('#ctn');
+	util.getDom('#nav').addEventListener('click', function (e) {
+		e.preventDefault();
+		var t = e.target;
+		if(t.tagName.toLowerCase() == 'a') {
+			loadPage(t.href, function (str, url) {
+				ctn.innerHTML = str;
+				/*
+					1、history.pushState();                2、history.replaceState();
+
+					两种方法都允许我们添加和更新历史记录，它们的工作原理相同并且可以添加数量相同的参数。除了方法之外，还有popstate事件。在后文中将介绍怎么使用和什么时候使用popstate事件。
+
+					pushState()和replaceState()参数一样，参数说明如下：
+
+					1、state：存储JSON字符串，可以用在popstate事件中。
+
+					2、title：现在大多数浏览器不支持或者忽略这个参数，最好用null代替
+
+					3、url：任意有效的URL，用于更新浏览器的地址栏，并不在乎URL是否已经存在地址列表中。更重要的是，它不会重新加载页面。
+				*/
+				/*
+					尽管当我们使用pushState()和replaceState()进行处理时，期待popstate事件被触发。
+					但实际上，情况并不是这样。相反，当你浏览会话历史记录时，
+					不管你是点击前进或者后退按钮，还是使用history.go和history.back方法，popstate都会被触发。
+
+					（在WebKit浏览器中，popstate事件在document的onload事件后触发，Firefox和IE没有这种行为）
+				*/
+				window.history.pushState(null, null, url);
+			});
+		}
+	});
+</script>
+</body>
+</html>
