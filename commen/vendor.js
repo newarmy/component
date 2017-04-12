@@ -5,7 +5,7 @@ define(function(){
 		getPrefix = function() {
 			for(var tempStr, arr = 'webkitT,MozT,msT,OT'.split(","), index = 0, len = arr.length; len > index; index++) {
 				if(tempStr = arr[index] +"ransform", tempStr in style) {
-					return arr[index].substr(0,len -1);
+					return arr[index].substr(0, arr[index].length -1);
 				}
 			}
 			return !1;
